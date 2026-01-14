@@ -1,6 +1,6 @@
 require_dependency 'project'
 
-module Contracts
+module Contracts::Patches
   module ProjectPatch
     def self.included(base)
       base.send(:include, InstanceMethods)

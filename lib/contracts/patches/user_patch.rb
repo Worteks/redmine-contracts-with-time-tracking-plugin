@@ -1,6 +1,6 @@
 require_dependency 'user'
 
-module Contracts
+module Contracts::Patches
 
   module UserPatch
     def self.included(base)

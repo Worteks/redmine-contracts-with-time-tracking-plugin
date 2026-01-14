@@ -1,10 +1,8 @@
-require_dependency 'contracts/hooks/hooks'
-require_dependency 'contracts/patches/time_entry_patch'
-require_dependency 'contracts/patches/timelog_controller_patch'
-require_dependency 'contracts/patches/user_patch'
-require_dependency 'contracts/patches/project_patch'
-require_dependency 'contracts/validators/is_after_agreement_date_validator'
-require_dependency 'contracts/validators/is_after_start_date_validator'
+require_relative 'lib/contracts/hooks'
+require_relative 'lib/contracts/patches/time_entry_patch'
+require_relative 'lib/contracts/patches/timelog_controller_patch'
+require_relative 'lib/contracts/patches/user_patch'
+require_relative 'lib/contracts/patches/project_patch'
 
 
 Redmine::Plugin.register :contracts do
@@ -36,11 +34,10 @@ Redmine::Plugin.register :contracts do
 end
 
 # Load your patches from contracts/lib/contracts/patches/
-# ActionDispatch::Callbacks.to_prepare do
-ActiveSupport::Reloader.to_prepare do
-  Project.send(:include, Contracts::ProjectPatch)
-  TimeEntry.send(:include, Contracts::TimeEntryPatch)
-  TimelogController.send(:include, Contracts::TimelogControllerPatch)
-  User.send(:include, Contracts::UserPatch)
-  require_dependency 'contract_category'
+Rails.application.config.after_initialize do
+  Project.send(:include, Contracts::Patches::ProjectPatch)
+  TimeEntry.send(:include, Contracts::Patches::TimeEntryPatch)
+  TimelogController.send(:include, Contracts::Patches::TimelogControllerPatch)
+  User.send(:include, Contracts::Patches::UserPatch)
+  require_relative 'app/models/contract_category'
 end

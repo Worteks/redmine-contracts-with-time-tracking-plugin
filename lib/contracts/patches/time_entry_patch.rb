@@ -1,6 +1,6 @@
 require_dependency 'time_entry'
 
-module Contracts
+module Contracts::Patches
 
   module TimeEntryPatch
     def self.included(base)
