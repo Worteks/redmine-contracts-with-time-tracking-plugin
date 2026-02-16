@@ -39,5 +39,6 @@ Rails.application.config.after_initialize do
   TimeEntry.send(:include, Contracts::Patches::TimeEntryPatch)
   TimelogController.send(:include, Contracts::Patches::TimelogControllerPatch)
   User.send(:include, Contracts::Patches::UserPatch)
+  Issue.send(:include, Contracts::Patches::IssuePatch)
   require_relative 'app/models/contract_category'
 end
