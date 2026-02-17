@@ -15,13 +15,12 @@ class Contract < ActiveRecord::Base
   after_save :apply_rates
   attr_accessor :rates
 
-  attribute :recurring_frequency, :string
-  enum :recurring_frequency, [
-    :not_recurring,
-    :monthly,
-    :yearly,
-    :completed
-  ]
+  enum :recurring_frequency, {
+    not_recurring: 0,
+    monthly: 1,
+    yearly: 2,
+    completed: 3
+  }
 
   # The values have been made lower-case to match the conventions of Rails I18n
   HOURLY = "hourly"
