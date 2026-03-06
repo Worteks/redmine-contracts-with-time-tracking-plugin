@@ -158,7 +158,7 @@ class ContractsController < ApplicationController
       @contract.end_date = nil
     end
 
-    if @contract.update_attributes(contract_params)
+    if @contract.update(contract_params)
       @contract.update_attribute(:rates, params[:rates])
       if @contract.contract_type == 'recurring'
         if @contract.monthly?

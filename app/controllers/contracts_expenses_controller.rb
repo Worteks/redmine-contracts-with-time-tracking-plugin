@@ -26,7 +26,7 @@ class ContractsExpensesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @contracts_expense.update_attributes(expense_params)
+      if @contracts_expense.update(expense_params)
         format.html { redirect_to contract_urlpath(@contracts_expense), notice: l(:text_expense_updated) }
       else
         load_contracts
